@@ -8,6 +8,7 @@ use std::path::PathBuf;
 
 /// Show the gzipped size of a file or stdin. A straight port of sindresorhus' Node.js gzip-size-cli.
 #[derive(Parser, Debug)]
+#[clap(name = "gzip-size")]
 struct Cli {
     file: Option<PathBuf>,
     /// Compression level [0-9]

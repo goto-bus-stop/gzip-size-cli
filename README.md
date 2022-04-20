@@ -4,11 +4,11 @@ Rust version of [@sindresorhus](https://github.com/sindresorhus)'s [gzip-size-cl
 I use that tool a lot but the startup time of Node.js is a bit high for something so simple.
 
 ```
-gzip-size-cli
+gzip-size
 Show the gzipped size of a file or stdin.
 
 USAGE:
-    gzip-size-cli [OPTIONS] [FILE]
+    gzip-size [OPTIONS] [FILE]
 
 ARGS:
     <FILE>
