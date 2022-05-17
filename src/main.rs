@@ -1,7 +1,7 @@
-use bytesize::ByteSize;
 use clap::Parser;
 use flate2::write::GzEncoder;
 use flate2::Compression;
+use humansize::{file_size_opts::BINARY, FileSize};
 use std::fs::File;
 use std::io::{BufReader, Read, Write};
 use std::path::PathBuf;
@@ -10,6 +10,7 @@ use std::path::PathBuf;
 #[derive(Parser, Debug)]
 #[clap(name = "gzip-size")]
 struct Cli {
+    /// The file to compress. If none is given, input is read from stdin.
     file: Option<PathBuf>,
     /// Compression level [0-9]
     #[clap(long, default_value_t = 9)]
@@ -94,15 +95,18 @@ fn main() -> anyhow::Result<()> {
 
     let write_size = encoder.finish()?.size();
     match (args.include_orginal, args.raw) {
-        (false, false) => println!("{}", ByteSize::b(write_size as u64)),
+        (false, false) => println!("{}", write_size.file_size(BINARY).unwrap()),
         (false, true) => println!("{}", write_size),
         (true, false) => println!(
             "{} → {}",
-            ByteSize::b(read_size as u64),
-            ByteSize::b(write_size as u64)
+            read_size.file_size(BINARY).unwrap(),
+            write_size.file_size(BINARY).unwrap(),
         ),
         (true, true) => println!("{} → {}", read_size, write_size),
     }
 
     Ok(())
 }
+
+#[cfg(test)]
+mod tests {}
