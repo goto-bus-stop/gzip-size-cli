@@ -83,7 +83,7 @@ fn main() -> anyhow::Result<()> {
     let mut encoder = GzEncoder::new(WriteSize::new(std::io::sink()), compression);
 
     let read_size = if let Some(path) = args.file {
-        let mut f = ReadSize::new(BufReader::new(File::open(path)?));
+        let mut f = ReadSize::new(BufReader::with_capacity(64 * 1024, File::open(path)?));
         std::io::copy(&mut f, &mut encoder)?;
         f.size()
     } else {
