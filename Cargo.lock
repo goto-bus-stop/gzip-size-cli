@@ -108,6 +108,7 @@ name = "gzip-size-cli"
 version = "0.0.0"
 dependencies = [
  "anyhow",
+ "atty",
  "clap",
  "flate2",
  "humansize",

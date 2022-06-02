@@ -86,11 +86,13 @@ fn main() -> anyhow::Result<()> {
         let mut f = ReadSize::new(BufReader::with_capacity(64 * 1024, File::open(path)?));
         std::io::copy(&mut f, &mut encoder)?;
         f.size()
-    } else {
+    } else if atty::isnt(atty::Stream::Stdin) {
         let stdin = std::io::stdin();
         let mut rs = ReadSize::new(stdin.lock());
         std::io::copy(&mut rs, &mut encoder)?;
         rs.size()
+    } else {
+        anyhow::bail!("No input: specify a file name or pipe something");
     };
 
     let write_size = encoder.finish()?.size();
