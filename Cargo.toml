@@ -10,9 +10,9 @@ path = "src/main.rs"
 [dependencies]
 anyhow = "1.0.56"
 atty = "0.2.14"
-clap = { version = "3.1.8", features = ["derive"] }
+clap = { version = "4.0.0", features = ["derive"] }
 flate2 = "1.0.22"
-humansize = "1.1.1"
+humansize = "2.0.0"
 
 [profile.release]
 lto = "fat"

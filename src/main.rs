@@ -1,7 +1,7 @@
 use clap::Parser;
 use flate2::write::GzEncoder;
 use flate2::Compression;
-use humansize::{file_size_opts::BINARY, FileSize};
+use humansize::{format_size, BINARY};
 use std::fs::File;
 use std::io::{BufReader, Read, Write};
 use std::path::PathBuf;
@@ -97,12 +97,12 @@ fn main() -> anyhow::Result<()> {
 
     let write_size = encoder.finish()?.size();
     match (args.include_orginal, args.raw) {
-        (false, false) => println!("{}", write_size.file_size(BINARY).unwrap()),
+        (false, false) => println!("{}", format_size(write_size, BINARY)),
         (false, true) => println!("{}", write_size),
         (true, false) => println!(
             "{} → {}",
-            read_size.file_size(BINARY).unwrap(),
-            write_size.file_size(BINARY).unwrap(),
+            format_size(read_size, BINARY),
+            format_size(write_size, BINARY),
         ),
         (true, true) => println!("{} → {}", read_size, write_size),
     }
