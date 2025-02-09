@@ -148,7 +148,7 @@ dependencies = [
 
 [[package]]
 name = "gzip-size-cli"
-version = "0.0.0"
+version = "1.0.0"
 dependencies = [
  "anyhow",
  "atty",
