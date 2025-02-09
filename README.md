@@ -21,5 +21,17 @@ OPTIONS:
         --raw                 Display value in bytes
 ```
 
+## Install
+
+Clone the repository, and use Cargo:
+```bash
+cargo build --release
+```
+
+You can put the resulting binary anywhere in your `$PATH`:
+```bash
+cp target/release/gzip-size /usr/bin/gzip-size
+```
+
 ## License
 Licensed under either of Apache License, Version 2.0 or MIT license at your option.
